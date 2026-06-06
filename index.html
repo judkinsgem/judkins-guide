@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Judkins Park — Guest Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #2D5016;
+    --green-mid: #4A7C2F;
+    --green-light: #C8DDB0;
+    --green-pale: #F0F5E8;
+    --amber: #C17D2A;
+    --amber-light: #F5E6C8;
+    --cream: #FAF7F0;
+    --ink: #1A1A14;
+    --ink-mid: #4A4A3A;
+    --ink-soft: #8A8A72;
+    --border: #D8D4C4;
+    --white: #FFFFFF;
+    --coral: #C4522A;
+    --coral-light: #F5E0D5;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--green);
+    color: var(--white);
+    padding: 64px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(74,124,47,0.4) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(193,125,42,0.2) 0%, transparent 40%);
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 8vw, 60px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 32px;
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .hero-tag {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* NAV PILLS */
+  .nav-strip {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-strip::-webkit-scrollbar { display: none; }
+  .nav-strip a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px 18px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-strip a:hover { color: var(--green); border-bottom-color: var(--green); }
+
+  /* MAIN */
+  .main { max-width: 720px; margin: 0 auto; padding: 48px 20px 80px; }
+
+  /* SECTION */
+  .section { margin-bottom: 56px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .icon-green { background: var(--green-pale); }
+  .icon-amber { background: var(--amber-light); }
+  .icon-coral { background: var(--coral-light); }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* CARDS */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(45,80,22,0.08);
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    gap: 12px;
+  }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .card-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-green { background: var(--green-pale); color: var(--green); }
+  .badge-amber { background: var(--amber-light); color: #7A4E10; }
+  .badge-coral { background: var(--coral-light); color: #8B3218; }
+  .badge-neutral { background: #F0EEE8; color: var(--ink-mid); }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--ink-mid);
+    margin-bottom: 12px;
+    line-height: 1.55;
+  }
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+  .card-meta span { display: flex; align-items: center; gap: 4px; }
+  .card-meta a {
+    color: var(--green-mid);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .card-meta a:hover { text-decoration: underline; }
+
+  .stars { color: var(--amber); letter-spacing: -1px; font-size: 13px; }
+
+  /* PARK HIGHLIGHT */
+  .park-card {
+    background: var(--green);
+    border-radius: 16px;
+    padding: 28px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .park-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .park-card p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+  .park-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .park-feature {
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 12px;
+  }
+
+  /* TIPS BOX */
+  .tips-box {
+    background: var(--amber-light);
+    border: 1px solid #E8D0A0;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .tips-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .tips-list { list-style: none; }
+  .tips-list li {
+    font-size: 14px;
+    color: var(--ink-mid);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .tips-list li:last-child { border-bottom: none; }
+  .tips-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--amber);
+    font-weight: 500;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--green);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 13px;
+  }
+  .footer strong { color: var(--white); }
+
+  @media (max-width: 480px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .hero { padding: 48px 20px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Seattle · Central District</div>
+    <h1>Judkins Park<br><em>Guest Guide</em></h1>
+    <p class="hero-sub">Your neighborhood companion — food, drinks & things to do within a mile</p>
+    <div class="hero-tags">
+      <span class="hero-tag">🍖 Soul Food</span>
+      <span class="hero-tag">🍜 Noodles & Cocktails</span>
+      <span class="hero-tag">☕ Coffee & Pastries</span>
+      <span class="hero-tag">🍺 Local Bars</span>
+      <span class="hero-tag">🌿 Parks & Trails</span>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-strip">
+  <a href="#park">The Park</a>
+  <a href="#eats">Eats</a>
+  <a href="#coffee">Coffee</a>
+  <a href="#bars">Bars</a>
+  <a href="#explore">Explore</a>
+  <a href="#tips">Tips</a>
+</nav>
+
+<main class="main">
+
+  <!-- THE PARK -->
+  <section class="section" id="park">
+    <div class="section-header">
+      <div class="section-icon icon-green">🌿</div>
+      <h2 class="section-title">Judkins Park</h2>
+    </div>
+
+    <div class="park-card">
+      <h3>Your Home Base</h3>
+      <p>Judkins Park is a beloved Central District green space with sweeping views of Lake Washington, the Cascades, and Mount Rainier on clear days. It's a genuine neighborhood hub — locals bring dogs, kids, and lawn chairs. The park sits at 2150 S Norman St and is open daily from 6am–10pm.</p>
+      <div class="park-features">
+        <span class="park-feature">⚽ Sports fields</span>
+        <span class="park-feature">🎾 Tennis courts</span>
+        <span class="park-feature">🏀 Basketball</span>
+        <span class="park-feature">🛝 Playground</span>
+        <span class="park-feature">🐕 Dog-friendly</span>
+        <span class="park-feature">🏔 Mountain views</span>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Central Park Trail</div>
+          <span class="card-badge badge-green">Trail</span>
+        </div>
+        <p class="card-desc">A peaceful loop trail winding through the surrounding neighborhood. Great for a morning walk with views of the community and green hillsides. Easy, mellow terrain.</p>
+        <div class="card-meta">
+          <span>📍 2150 S Norman St</span>
+          <span>🕕 6am – 10pm</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Leschi–Lake Dell Natural Area</div>
+          <span class="card-badge badge-green">Nature</span>
+        </div>
+        <p class="card-desc">A hidden woodland preserve just east of Judkins with forested trails and a beautiful viewpoint overlooking Lake Washington and Bellevue. Feels miles away from the city.</p>
+        <div class="card-meta">
+          <span>📍 3525 E Terrace St</span>
+          <span>🕕 6am – 10pm</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- EATS -->
+  <section class="section" id="eats">
+    <div class="section-header">
+      <div class="section-icon icon-coral">🍽</div>
+      <h2 class="section-title">Places to Eat</h2>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Wood Shop BBQ</div>
+          <span class="card-badge badge-coral">BBQ · $$</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="card-desc">The best BBQ in Seattle — no contest. Texas-style brisket, ribs, and pulled pork done with genuine skill. The chili brisket mac & cheese is a must. Often draws lines, worth every minute.</p>
+        <div class="card-meta">
+          <span>📍 2513 S Jackson St</span>
+          <span>🕙 11am – 8pm daily</span>
+          <span><a href="tel:+12064857381">📞 (206) 485-7381</a></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Reckless Noodle House</div>
+          <span class="card-badge badge-coral">Vietnamese · $$</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="card-desc">A neighborhood gem for creative noodle dishes and killer cocktails. The Ma La Braised Beef Cheek Noodle and Five Spice Duck Confit are outstanding. Great date spot, buzzy atmosphere.</p>
+        <div class="card-meta">
+          <span>📍 2519 S Jackson St</span>
+          <span>🕓 4pm – 11pm (Fri–Sat till midnight)</span>
+          <span><a href="tel:+12063295499">📞 (206) 329-5499</a></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Wally's NW Soul</div>
+          <span class="card-badge badge-amber">Soul Food · $$</span>
+        </div>
+        <div class="stars">★★★★½</div>
+        <p class="card-desc">Vibrant and modern soul food spot with serious wings — crispy, juicy, with loads of flavor options. The mac & cheese is homemade and creamy. Say hi to Wally if he's around.</p>
+        <div class="card-meta">
+          <span>📍 2218 S Jackson St</span>
+          <span>🕛 Noon – 8pm (Sun till 6pm, Mon closed)</span>
+          <span><a href="tel:+12066933335">📞 (206) 693-3335</a></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Simply Soulful</div>
+          <span class="card-badge badge-amber">Soul Food · $$</span>
+        </div>
+        <div class="stars">★★★★</div>
+        <p class="card-desc">Black-owned neighborhood classic on S Jackson. Known for their "soul rolls," collard greens, catfish, and banana pudding. Counter service, casual, authentic. Breakfast and lunch on weekends.</p>
+        <div class="card-meta">
+          <span>📍 2321 S Jackson St</span>
+          <span>🕙 10am – 8pm (Fri–Sun from 9am, Mon closed)</span>
+          <span><a href="tel:+12064026618">📞 (206) 402-6618</a></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Ba Bar Capitol Hill</div>
+          <span class="card-badge badge-neutral">Vietnamese · $$</span>
+        </div>
+        <div class="stars">★★★★½</div>
+        <p class="card-desc">Lively Vietnamese restaurant and cocktail bar just north on 12th Ave. Pho, bun cha, imperial rolls, and a full bar — open until midnight every night. Great after-work or late-night option.</p>
+        <div class="card-meta">
+          <span>📍 550 12th Ave</span>
+          <span>🕙 11am – midnight daily</span>
+          <span><a href="tel:+12063282030">📞 (206) 328-2030</a></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- COFFEE -->
+  <section class="section" id="coffee">
+    <div class="section-header">
+      <div class="section-icon icon-amber">☕</div>
+      <h2 class="section-title">Coffee & Pastries</h2>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Temple Pastries</div>
+          <span class="card-badge badge-amber">Bakery · Café</span>
+        </div>
+        <div class="stars">★★★★½</div>
+        <p class="card-desc">Right on S Jackson — beautiful, inventive pastries that people drive across the city for. The miso caramel cookie, gruyère & shallot croissant, and kouign-amann are legendary. Bright, plant-filled space, lines move fast.</p>
+        <div class="card-meta">
+          <span>📍 2524 S Jackson St #104</span>
+          <span>🕖 7am – 3pm daily</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Broadcast Coffee</div>
+          <span class="card-badge badge-green">Coffee</span>
+        </div>
+        <div class="stars">★★★★½</div>
+        <p class="card-desc">Shares the same building as Temple Pastries (they're sister spots). Solid espresso drinks with indoor and outdoor seating — a good spot to settle in for a work session or a meeting.</p>
+        <div class="card-meta">
+          <span>📍 2524 S Jackson St #104</span>
+          <span>🕖 7am – 3pm daily</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">The Usual</div>
+          <span class="card-badge badge-amber">Café · Ukrainian</span>
+        </div>
+        <div class="stars">★★★★½</div>
+        <p class="card-desc">A charming, beautifully designed café on E Yesler with a unique Eastern European twist — syrnyky (Ukrainian cheese pancakes), pelmeni, RAF coffee, and borscht. One-of-a-kind in Seattle.</p>
+        <div class="card-meta">
+          <span>📍 1414 E Yesler Way</span>
+          <span>🕗 8am – 4pm (Sat–Sun till 6pm)</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- BARS -->
+  <section class="section" id="bars">
+    <div class="section-header">
+      <div class="section-icon icon-coral">🍺</div>
+      <h2 class="section-title">Bars & Nightlife</h2>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Twilight Exit</div>
+          <span class="card-badge badge-coral">Dive Bar · $</span>
+        </div>
+        <div class="stars">★★★★½</div>
+        <p class="card-desc">The quintessential Central District dive — dimly lit with lanterns, pinball machines in the back, and bartenders who pour fast and pour well. The food is surprisingly solid. Late nights, friendly crowd, great vibe.</p>
+        <div class="card-meta">
+          <span>📍 2514 E Cherry St</span>
+          <span>🕛 Noon – 1:30am daily</span>
+          <span><a href="tel:+12063852392">📞 (206) 385-2392</a></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Neighbor Lady Public House</div>
+          <span class="card-badge badge-amber">Pub · $$</span>
+        </div>
+        <div class="stars">★★★★½</div>
+        <p class="card-desc">A beloved neighborhood pub in Midtown Square with a lovely courtyard patio and excellent food. The chicken sandwich is exceptional. Don't miss Prime Rib Sundays — a 16oz cut for $25 with salad and potato.</p>
+        <div class="card-meta">
+          <span>📍 1133 24th Ave, Unit Q</span>
+          <span>🕓 4pm – midnight (Sat–Sun from 11am)</span>
+          <span><a href="tel:+12064204374">📞 (206) 420-4374</a></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Red Lounge</div>
+          <span class="card-badge badge-coral">Club · Caribbean</span>
+        </div>
+        <div class="stars">★★★★</div>
+        <p class="card-desc">Seattle's heart and soul for Afrobeats and Caribbean culture. Best oxtails in the city, jerk chicken, and beef patties. Fridays and Saturdays turn into a full-on dance night with a DJ. A truly unique spot.</p>
+        <div class="card-meta">
+          <span>📍 1212 E Jefferson St</span>
+          <span>🕐 1pm – 9pm (Fri–Sat till 2am, Mon closed)</span>
+          <span><a href="tel:+12063239112">📞 (206) 323-9112</a></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- EXPLORE -->
+  <section class="section" id="explore">
+    <div class="section-header">
+      <div class="section-icon icon-green">🗺</div>
+      <h2 class="section-title">Explore the Area</h2>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Washington Park Arboretum</div>
+          <span class="card-badge badge-green">Nature · Free</span>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="card-desc">A stunning 230-acre botanical garden about a mile north. Forested trails wind past Japanese maples, towering redwoods, and lily-pad ponds. Gorgeous year-round; bloom season in spring is unforgettable.</p>
+        <div class="card-meta">
+          <span>📍 2300 Arboretum Dr E</span>
+          <span>🕗 8am – 8pm daily</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">S Jackson St Cultural Corridor</div>
+          <span class="card-badge badge-neutral">History · Walk</span>
+        </div>
+        <p class="card-desc">The stretch of S Jackson St between 20th and 26th Ave is one of Seattle's most historically significant Black cultural corridors. Stroll past murals, independent businesses, and history that shaped the city.</p>
+        <div class="card-meta">
+          <span>📍 S Jackson St, Central District</span>
+          <span>🚶 Free self-guided walk</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-name">Lake Washington Boulevard</div>
+          <span class="card-badge badge-green">Scenic · Bike/Walk</span>
+        </div>
+        <p class="card-desc">Head east about a mile and you hit the scenic Boulevard hugging Lake Washington — flat, beautiful, and perfect for biking or walking with mountain views across the water.</p>
+        <div class="card-meta">
+          <span>📍 Lake Washington Blvd S</span>
+          <span>🚲 Open daily, always free</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- TIPS -->
+  <section class="section" id="tips">
+    <div class="section-header">
+      <div class="section-icon icon-amber">💡</div>
+      <h2 class="section-title">Visitor Tips</h2>
+    </div>
+
+    <div class="tips-box">
+      <h3>Good to Know</h3>
+      <ul class="tips-list">
+        <li>Wood Shop BBQ and Temple Pastries both sell out — arrive before 1pm to be safe, especially on weekends.</li>
+        <li>The S Jackson St corridor is very walkable. Wood Shop BBQ, Reckless Noodle, and Temple Pastries are all within a single block of each other at 25th Ave.</li>
+        <li>Twilight Exit is cash-friendly and laid-back — no dress code, no attitude, just good drinks.</li>
+        <li>Neighbor Lady's courtyard patio catches afternoon sun and is one of the best outdoor drinking spots in the neighborhood.</li>
+        <li>For the Arboretum, park off Lake Washington Blvd E — the lot by the Japanese Garden fills up on weekends.</li>
+        <li>Rideshare (Lyft/Uber) is easy here. Street parking in the neighborhood is generally free and available outside of events at the park.</li>
+        <li>Seattle weather: always bring a light layer, even in summer. Rain can appear fast.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p><strong>Judkins Park Guest Guide</strong></p>
+  <p style="margin-top:6px;">Central District · Seattle, WA &nbsp;·&nbsp; Updated 2025</p>
+</footer>
+
+</body>
+</html>

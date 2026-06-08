@@ -20,7 +20,8 @@
   .hero h1 em { font-style: normal; }
   .hero-sub { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 15px; color: rgba(255,255,255,.75); margin-bottom: 32px; }
   .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-  .hero-tag { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 999px; padding: 6px 16px; font-size: 13px; color: rgba(255,255,255,.9); }
+  .hero-tag { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 999px; padding: 6px 16px; font-size: 13px; color: rgba(255,255,255,.9); text-decoration: none; cursor: pointer; }
+  .hero-tag:hover { background: rgba(255,255,255,.22); }
   .nav-strip { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 16px; display: flex; overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 100; }
   .nav-strip::-webkit-scrollbar { display: none; }
   .nav-strip a { font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-decoration: none; color: var(--ink-soft); font-size: 13px; font-weight: 500; padding: 14px 18px; white-space: nowrap; border-bottom: 2px solid transparent; display: block; }
@@ -101,11 +102,15 @@
     <h1><em>Judkins Gem</em><br>Guest Guide</h1>
     <p class="hero-sub">Your neighborhood companion, food, drinks and things to do within a mile</p>
     <div class="hero-tags">
-      <span class="hero-tag">&#127830; Soul Food</span>
-      <span class="hero-tag">&#127836; Noodles and Cocktails</span>
-      <span class="hero-tag">&#9749; Coffee and Pastries</span>
-      <span class="hero-tag">&#127866; Local Bars</span>
-      <span class="hero-tag">&#127807; Parks and Trails</span>
+      <a href="#staying" class="hero-tag">&#127968; Staying Here</a>
+      <a href="#transit" class="hero-tag">&#128647; Getting Around</a>
+      <a href="#eats" class="hero-tag">&#127869; Eats</a>
+      <a href="#coffee" class="hero-tag">&#9749; Coffee and Pastries</a>
+      <a href="#bars" class="hero-tag">&#127866; Local Bars</a>
+      <a href="#park" class="hero-tag">&#127807; Parks and Trails</a>
+      <a href="#daytrips" class="hero-tag">&#128506; Day Trips</a>
+      <a href="#worldcup" class="hero-tag">&#127942; World Cup 2026</a>
+      <a href="#tips" class="hero-tag">&#128161; Tips</a>
     </div>
   </div>
 </div>
@@ -120,6 +125,7 @@
   <a href="#bars">Bars</a>
   <a href="#shopping">Shopping</a>
   <a href="#explore">Explore</a>
+  <a href="#worldcup">World Cup</a>
   <a href="#daytrips">Day Trips</a>
   <a href="#tips">Tips</a>
 </nav>
